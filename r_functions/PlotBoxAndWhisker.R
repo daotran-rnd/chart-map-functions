@@ -24,7 +24,6 @@ PlotBoxAndWhisker <- function(data,
   # Capture variables 
   val_enquo <- rlang::enquo(value_col)
   cat_enquo <- rlang::enquo(category_col)
-  
   val_name  <- rlang::as_name(val_enquo)
   
   # Data preparation 
