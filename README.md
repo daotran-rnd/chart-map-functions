@@ -15,11 +15,22 @@ CallRVizToolbox <- function(file) {
   source(paste0(git_path, file))
 }
 ```
+
 ### Step 2: Load a specific visualisation tool
 Call the specific tool you need. For example, to load a chart function `PlotLineChart`:
-
 ```R
 CallRVizToolbox("PlotLineChart.R")
+```
+
+### Step 3: Use the function for its designated purpose 
+You can read description in each R function to know parameters to input. 
+
+Example: We have a dataset `transactions_data` and there are columns called `OrderDate`, `QuantitySold`. 
+Here is how to input parameters and use the function `PlotLineChart()` for this example data. 
+```R
+PlotLineChart(data = transactions_data,
+              date_col = OrderDate,
+              value_col = QuantitySold ) 
 ```
 
 **Enjoy and Stay Strong!⚡**
