@@ -13,7 +13,7 @@
 
 PlotBoxAndWhisker <- function(data, 
                               value_col, 
-                              category_col = NULL, 
+                              category_col, 
                               chart_title = NULL, 
                               color = "#003366") {
   
