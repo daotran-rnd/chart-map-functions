@@ -1,4 +1,5 @@
 #' @title Plot Interactive Box and Whisker (or Boxplot)
+#'
 #' @description Draw a single boxplot for a numeric column, or multiple boxplots
 #' for a numeric value (y-axis) and a categorical value (x-axis)  
 #' @author daotq
