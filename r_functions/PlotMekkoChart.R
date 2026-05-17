@@ -49,7 +49,7 @@ PlotMekkoChart <- function(data, cat_var, group_var, value_var,
       x_rel = cat_total / sum(cat_total),
       xmax = cumsum(x_rel),
       xmin = xmax - x_rel,
-      x_mid = xmin + (x_rel / 2) # Điểm giữa để đặt nhãn tên Trình duyệt
+      x_mid = xmin + (x_rel / 2) 
     ) %>%
     select(cat, xmin, xmax, x_mid)
   
@@ -63,7 +63,7 @@ PlotMekkoChart <- function(data, cat_var, group_var, value_var,
       ymin = ymax - prop_in_cat,
       tooltip = paste0("<b>", cat, "</b><br>", 
                        group, ": ", round(prop_in_cat * 100, 1), "%<br>",
-                       "Giá trị: ", format(value, big.mark = ",")),
+                       "Value: ", format(value, big.mark = ",")),
       data_id = paste0(as.character(cat), "_", as.character(group))
     ) %>%
     ungroup()
