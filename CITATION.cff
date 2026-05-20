@@ -4,6 +4,12 @@ authors:
 - family-names: "Dao"
   given-names: "Tran"
   orcid: "https://orcid.org/0009-0000-1203-0387"
+- family-names: "Hoang Bao"
+  given-names: "Nguyen"
+- family-names: "Chau Thien Bao"
+  given-names: "Nguyen"
+- family-names: "Huynh Anh"
+  given-names: "Nguyen"
 title: "RVizToolbox: R functions for creating charts and maps"
 version: 1.0.0
 date-released: 2026-04-25
