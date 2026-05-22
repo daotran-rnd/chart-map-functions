@@ -11,9 +11,9 @@ Copy and paste this loader function into your R script. It acts as a bridge to t
 
 ```R
 CallRVizToolbox <- function(file) {
-  git_path <- "https://raw.githubusercontent.com/daotran-rnd/chart-map-functions/refs/heads/main/r_functions/"
-  source(paste0(git_path, file))
-}
+  source(paste0(
+    "https://raw.githubusercontent.com/daotran-rnd/chart-map-functions/main/r_functions/",
+    file)) }
 ```
 
 ### Step 2: Load a specific visualisation tool
