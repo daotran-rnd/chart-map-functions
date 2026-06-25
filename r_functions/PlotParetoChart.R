@@ -16,35 +16,26 @@
 #'
 #' @export
 
-PlotParetoChart <- function(data, 
-                            cate_col, 
-                            val_col, 
-                            cum_col, 
-                            title = "Pareto Chart" ) {
+PlotParetoChart <-function(data,
+                             cate_col,
+                             val_col,
+                             cum_col,
+                             title = "ABC Analysis",
+                             subtitle = "Pareto Principle applied to Product Sales") {
   
-  if (!require("pacman")) install.packages("pacman")
-  pacman::p_load(echarts4r, dplyr, htmlwidgets)
+  pacman::p_load(echarts4r, htmlwidgets, rlang)
   
-  # Preprocess data
-  plot_data <- data %>%
-    arrange(desc(!!sym(val_col))) %>%
-    mutate(!!sym(cate_col) := as.character(!!sym(cate_col)))
-  
-  # Chart
-  chart <- plot_data %>%
-    e_charts_alpha(!!sym(cate_col)) %>% 
-    
-    ## Primary Axis
-    e_bar_alpha(!!sym(val_col), name = val_col) %>%
-    
-    ## Secondary Axis
-    e_line_alpha(!!sym(cum_col), name = "Cumulative %", y_index = 1, symbol = "none") %>%
-    
-    ## Configure Axes
-    e_y_axis(
-      name = val_col,
-      splitLine = list(show = FALSE)
-    ) %>%
+  # get column names
+  cate_str <- rlang::as_label(rlang::enquo(cate_col))
+  val_str  <- rlang::as_label(rlang::enquo(val_col))
+  cum_str  <- rlang::as_label(rlang::enquo(cum_col))
+
+  # plot chart
+  chart <- data %>%
+    e_charts_(cate_str) %>%
+    e_bar_(val_str, name = val_str) %>%
+    e_line_(cum_str, name = "Cumulative %", y_index = 1, symbol = "none") %>%
+    e_y_axis(name = val_str, splitLine = list(show = FALSE)) %>%
     e_y_axis(
       name = "Cumulative %",
       index = 1,
@@ -53,8 +44,6 @@ PlotParetoChart <- function(data,
       interval = 20,
       formatter = htmlwidgets::JS("function(value){ return value + '%'; }")
     ) %>%
-    
-    ## Interactivity and Styling
     e_tooltip(
       trigger = "axis",
       backgroundColor = "rgba(255, 255, 255, 1)",
@@ -63,18 +52,13 @@ PlotParetoChart <- function(data,
       textStyle = list(color = "#000", fontSize = 12),
       extraCssText = "box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); padding: 10px;"
     ) %>%
-    e_title(title) %>%
+    e_title(title, subtitle) %>%
     e_legend(bottom = 0) %>%
     e_theme("infographic") %>%
     e_datazoom(type = "slider", start = 0, end = 100) %>%
     e_x_axis(
-      name = cate_col,
-      axisLabel = list(
-        interval = "auto",
-        hideOverlap = TRUE,
-        rotate = 45,
-        fontSize = 8
-      )
+      name = cate_str,
+      axisLabel = list(interval = "auto", hideOverlap = TRUE, rotate = 45, fontSize = 8)
     )
   
   return(chart)
